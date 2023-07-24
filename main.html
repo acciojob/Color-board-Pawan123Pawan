@@ -1,16 +1,69 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <title>Color Board</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(40, 20px);
+      grid-template-rows: repeat(20, 20px);
+      grid-gap: 2px;
+    }
+
+    .square {
+      width: 100%;
+      height: 100%;
+      background-color: #f2f2f2;
+      transition: background-color 1s;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <div class="container">
+    <!-- JavaScript will dynamically create 800 boxes -->
+  </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.container');
+
+      // Create 800 boxes with class "square"
+      for (let i = 0; i < 800; i++) {
+        const square = document.createElement('div');
+        square.classList.add('square');
+        container.appendChild(square);
+
+        // Add event listener to change the background color on hover
+        square.addEventListener('mouseover', () => {
+          square.style.backgroundColor = getRandomColor();
+        });
+
+        // Add event listener to smoothly revert the background color after 1 second
+        square.addEventListener('mouseout', () => {
+          setTimeout(() => {
+            square.style.backgroundColor = '#f2f2f2';
+          }, 1000);
+        });
+      }
+
+      // Function to generate a random color
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+    });
+  </script>
 </body>
-
 </html>
